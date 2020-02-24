@@ -25,8 +25,7 @@ public class ProcessController {
         JSONObject jsonObject=new JSONObject(json);
         String processName=jsonObject.getString("process_name");
         String processNumber=jsonObject.getString("process_number");
-        List<Product> productList=new ArrayList<Product>();
-        Process process=new Process(processName,processNumber,productList);
+        Process process=new Process(processName,processNumber);
         return dao.save(process);
     }
 
