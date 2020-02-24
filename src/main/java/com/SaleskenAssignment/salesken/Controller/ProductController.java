@@ -61,6 +61,7 @@ public Product AddProduct(@RequestBody String json) {
     List<Process> processArrayList=product.getProcesses();
     processArrayList.add(process);
     product.setProcesses(processArrayList);
+    dao.save(product);
     return "Process  '"+process.getProcessName()+"' has been successfully added to Product '" +product.getProductName()+"'";
 }
     @PatchMapping("/DeleteProcess/{productId}/{processId}")
