@@ -28,16 +28,24 @@ public class Process {
     @Column(name="process_number")
     private String processNumber;
 
+    @ManyToMany(mappedBy = "processes",fetch = FetchType.LAZY)
+    private List<Product> products=new ArrayList<Product>();
 
 
-
-    public Process(String processName, String processNumber) {
+    public Process(String processName, String processNumber, List<Product> products) {
         this.processName = processName;
         this.processNumber = processNumber;
-
+        this.products = products;
     }
 
     public Process() {
+    }
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public String getProcessName() {

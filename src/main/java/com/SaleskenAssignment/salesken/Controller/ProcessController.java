@@ -17,7 +17,11 @@ public class ProcessController {
 
     @GetMapping("/getAllProcess")
     public List<Process> getallProcess(){
-        return (List<Process>)dao.findAll();
+        List<Process> processList= (List<Process>) dao.findAll();
+        for(int index=0;index<processList.size();index++){
+            processList.get(index).getProducts().clear();
+        }
+        return processList;
     }
 
     @PostMapping("/addProcess")
@@ -25,17 +29,19 @@ public class ProcessController {
         JSONObject jsonObject=new JSONObject(json);
         String processName=jsonObject.getString("process_name");
         String processNumber=jsonObject.getString("process_number");
-        Process process=new Process(processName,processNumber);
+        List<Product> productList=new ArrayList<Product>();
+        Process process=new Process(processName,processNumber,productList);
         return dao.save(process);
     }
 
     @PatchMapping("/UpdateProcess/{id}")
-    public Process UpdateProcess(@RequestBody String json,@PathVariable long id) {
+    public String UpdateProcess(@RequestBody String json,@PathVariable long id) {
         JSONObject jsonObj = new JSONObject(json);
         Process process=dao.findById(id).get();
         process.setProcessName(jsonObj.getString("process_name"));
         process.setProcessNumber(jsonObj.getString("process_number"));
-        return dao.save(process);
+        dao.save(process);
+        return "Successfully updated";
     }
 
     @DeleteMapping("/DeleteProcess/{id}")

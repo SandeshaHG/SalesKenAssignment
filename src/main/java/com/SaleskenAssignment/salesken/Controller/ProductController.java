@@ -27,7 +27,11 @@ public String test(){
 }
 @GetMapping("/getAllProducts")
 List<Product> getAllProducts(){
-    return (List<Product>) dao.findAll();
+    List<Product> productList= (List<Product>) dao.findAll();
+    for(int index=0;index<productList.size();index++){
+        productList.get(index).getProcesses().clear();
+    }
+    return productList;
 }
 
 @PostMapping("/AddProduct")
@@ -42,7 +46,7 @@ public Product AddProduct(@RequestBody String json) {
     return dao.save(product);
 }
     @PatchMapping("/UpdateProduct/{id}")
-    public Product UpdateProduct(@RequestBody String json,@PathVariable long id) {
+    public String UpdateProduct(@RequestBody String json,@PathVariable long id) {
         JSONObject jsonObj = new JSONObject(json);
         Product product=dao.findById(id).get();
         product.setProductName(jsonObj.getString("product_name"));
@@ -51,7 +55,8 @@ public Product AddProduct(@RequestBody String json) {
         product.setProductImageName(jsonObj.getString("product_image_name"));
         List<Process> processArrayList=new ArrayList<Process>();
         product.setProcesses(processArrayList);
-        return dao.save(product);
+        dao.save(product);
+        return "Successfully Updated";
     }
 
 @PatchMapping("/AddProcess/{productId}/{processId}")
