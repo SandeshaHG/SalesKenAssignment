@@ -39,8 +39,8 @@ public class ProcessController {
         return dao.save(process);
     }
 
-    @DeleteMapping("/{id}")
-    public String delteProcess(@PathVariable long id){
+    @DeleteMapping("/DeleteProcess/{id}")
+    public String deleteProcess(@PathVariable long id){
         dao.deleteById(id);
         return "Successfully deleted";
     }
