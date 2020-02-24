@@ -9,12 +9,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * The Rest Controller
+ */
 @RestController
 public class ProcessController {
     @Autowired
     public ProcessRepo dao;
 
+    /**
+     * Method to get All the available processes
+     * @return List of all the processes
+     * */
     @GetMapping("/getAllProcess")
     public List<Process> getallProcess(){
         List<Process> processList= (List<Process>) dao.findAll();
@@ -26,6 +32,11 @@ public class ProcessController {
         return processList;
     }
 
+    /**
+     * Method to add a process
+     * @param json  Process from the Request body in json format
+     * @return Returns the created process
+     */
     @PostMapping("/addProcess")
     public Process addProcess(@RequestBody String json){
         JSONObject jsonObject=new JSONObject(json);
@@ -36,6 +47,12 @@ public class ProcessController {
         return dao.save(process);
     }
 
+    /**
+     * Method to get update a Process
+     * @param id The process id to edit
+     * @param json  process from the Request body in json format
+     * @return Returns the acknowledgement
+     */
     @PatchMapping("/UpdateProcess/{id}")
     public String UpdateProcess(@RequestBody String json,@PathVariable long id) {
         JSONObject jsonObj = new JSONObject(json);
@@ -46,6 +63,11 @@ public class ProcessController {
         return "Successfully updated";
     }
 
+    /**
+     * Method to get delete a process
+     * @param id The process id to delete
+     * @return Returns the acknowledgement
+     */
     @DeleteMapping("/DeleteProcess/{id}")
     public String deleteProcess(@PathVariable long id){
         dao.deleteById(id);

@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * Product  is the main entity we'll be using
+ *
+ */
 @Entity
 @Getter
 @Setter
@@ -20,22 +24,37 @@ public class Product {
     @Column(name="id")
     private long id;
 
+    /**
+     * The name of the Product
+     */
     @NonNull
     @Column(name="product_name")
     private String productName;
 
+    /**
+     * The Number of documents in the product
+     */
     @NonNull
     @Column(name="product_number_of_documents")
     private String productNumberOfDocuments;
 
+    /**
+     * The Product Description
+     */
     @NonNull
     @Column(name="product_description")
     private String productDescription;
 
+    /**
+     * The image file name fo the product
+     */
     @NonNull
     @Column(name="product_image_name")
     private String productImageName;
 
+    /**
+     * A list of processes in the product.
+     */
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Process> processes=new ArrayList<Process>();
 

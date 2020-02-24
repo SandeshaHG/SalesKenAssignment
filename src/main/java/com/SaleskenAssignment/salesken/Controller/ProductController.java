@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The Rest Controller
+ */
 @RestController
 public class ProductController {
 @Autowired
@@ -21,10 +24,11 @@ private ProductRepo dao;
 @Autowired
 private ProcessRepo processdao;
 
-@GetMapping("/TestDeploy")
-public String test(){
-    return "working fine";
-}
+
+    /**
+     * Method to get All the available products
+     * @return List of all the products
+     * */
 @GetMapping("/getAllProducts")
 List<Product> getAllProducts(){
     List<Product> productList= (List<Product>) dao.findAll();
@@ -36,6 +40,11 @@ List<Product> getAllProducts(){
     return productList;
 }
 
+    /**
+     * Method to add a product
+     * @param json  Product from the Request body in json format
+     * @return Returns the created product
+     */
 @PostMapping("/AddProduct")
 public Product AddProduct(@RequestBody String json) {
     JSONObject jsonObj = new JSONObject(json);
@@ -47,6 +56,12 @@ public Product AddProduct(@RequestBody String json) {
     Product product = new Product(jsonProductName, jsonProductNumberOfDocuments, jsonproductDescription, jsonproductImageName,processArrayList);
     return dao.save(product);
 }
+    /**
+     * Method to get update a Product
+     * @param id The Product id to edit
+     * @param json  Product from the Request body in json format
+     * @return Returns the acknowledgement
+     */
     @PatchMapping("/UpdateProduct/{id}")
     public String UpdateProduct(@RequestBody String json,@PathVariable long id) {
         JSONObject jsonObj = new JSONObject(json);
@@ -61,6 +76,12 @@ public Product AddProduct(@RequestBody String json) {
         return "Successfully Updated";
     }
 
+    /**
+     * Method to get Add a Process to the product
+     * @param productId The Product id to which a process has to be added
+     * @param processId  The Process which is being added
+     * @return Returns the acknowledgement
+     */
 @PatchMapping("/AddProcess/{productId}/{processId}")
     public String  AddProcess(@PathVariable long productId,@PathVariable long processId){
     Process process=processdao.findById(processId).get();
@@ -71,6 +92,12 @@ public Product AddProduct(@RequestBody String json) {
     dao.save(product);
     return "Process  '"+process.getProcessName()+"' has been successfully added to Product '" +product.getProductName()+"'";
 }
+    /**
+     * Method to get Delete a process from a product
+     * @param processId The Process id to delete
+     * @param productId The product Id to delete from
+     * @return Returns the acknowledgement
+     */
     @PatchMapping("/DeleteProcess/{productId}/{processId}")
     public String  DeleteProcess(@PathVariable long productId,@PathVariable long processId){
         Process process=processdao.findById(processId).get();
@@ -80,6 +107,12 @@ public Product AddProduct(@RequestBody String json) {
         product.setProcesses(processArrayList);
         return "Process  '"+process.getProcessName()+"' has been successfully Deleted from Product '" +product.getProductName()+"'";
     }
+
+    /**
+     * Method to get delete a Product
+     * @param id The Product id to delete
+     * @return Returns the acknowledgement
+     */
 @DeleteMapping("/DeleteProduct/{id}")
     public String DeleteProduct(@PathVariable long id){
     dao.deleteById(id);

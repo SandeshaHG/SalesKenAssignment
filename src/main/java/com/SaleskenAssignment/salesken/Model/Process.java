@@ -9,7 +9,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Process  is the second entity we'll be using.A product can have many processes.
+ *
+ */
 @Entity
 @Getter
 @Setter
@@ -20,14 +23,23 @@ public class Process {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
+    /**
+     * The name of the Process
+     */
     @NonNull
     @Column(name="process_name")
     private String processName;
 
+    /**
+     * The Process number
+     */
     @NonNull
     @Column(name="process_number")
     private String processNumber;
 
+    /**
+     * List of all products having the respective process
+     */
     @ManyToMany(mappedBy = "processes",fetch = FetchType.LAZY)
     private List<Product> products=new ArrayList<Product>();
 
