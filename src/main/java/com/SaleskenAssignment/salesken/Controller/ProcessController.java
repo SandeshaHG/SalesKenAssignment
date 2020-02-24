@@ -19,7 +19,9 @@ public class ProcessController {
     public List<Process> getallProcess(){
         List<Process> processList= (List<Process>) dao.findAll();
         for(int index=0;index<processList.size();index++){
-            processList.get(index).getProducts().clear();
+            for(int i=0;i<processList.get(index).getProducts().size();i++){
+                processList.get(index).getProducts().get(i).getProcesses().clear();
+            }
         }
         return processList;
     }

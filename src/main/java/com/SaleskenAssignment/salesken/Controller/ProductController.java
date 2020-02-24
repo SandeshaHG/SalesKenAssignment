@@ -29,7 +29,9 @@ public String test(){
 List<Product> getAllProducts(){
     List<Product> productList= (List<Product>) dao.findAll();
     for(int index=0;index<productList.size();index++){
-        productList.get(index).getProcesses().clear();
+        for(int i=0;i<productList.get(index).getProcesses().size();i++){
+            productList.get(index).getProcesses().get(i).getProducts().clear();
+        }
     }
     return productList;
 }
