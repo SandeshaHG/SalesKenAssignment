@@ -30,6 +30,15 @@ public class ProcessController {
         return dao.save(process);
     }
 
+    @PatchMapping("/UpdateProcess/{id}")
+    public Process UpdateProcess(@RequestBody String json,@PathVariable long id) {
+        JSONObject jsonObj = new JSONObject(json);
+        Process process=dao.findById(id).get();
+        process.setProcessName(jsonObj.getString("process_name"));
+        process.setProcessNumber(jsonObj.getString("process_number"));
+        return dao.save(process);
+    }
+
     @DeleteMapping("/{id}")
     public String delteProcess(@PathVariable long id){
         dao.deleteById(id);
