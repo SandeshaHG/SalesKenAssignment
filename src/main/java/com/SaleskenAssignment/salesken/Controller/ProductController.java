@@ -24,7 +24,10 @@ private ProductRepo dao;
 @Autowired
 private ProcessRepo processdao;
 
-
+@GetMapping("/")
+public String landingpage(){
+    return "Welcome. Please check out the ReadMe file in https://github.com/SandeshaHG/SalesKenAssignment to know more about the project and endpoints";
+}
     /**
      * Method to get All the available products
      * @return List of all the products
