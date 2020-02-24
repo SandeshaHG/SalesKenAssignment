@@ -17,7 +17,7 @@ The project is written using the Spring Boot Framework.
 
 ## ORM
 
-The project uses Hibernate as the object-relational mapping tool
+The project uses Hibernate as the object relational mapping tool
 
 ## Database
 
