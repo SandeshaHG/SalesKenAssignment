@@ -21,6 +21,10 @@ private ProductRepo dao;
 @Autowired
 private ProcessRepo processdao;
 
+@GetMapping("/TestDeploy")
+public String test(){
+    return "working fine";
+}
 @GetMapping("/getAllProducts")
 List<Product> getAllProducts(){
     return (List<Product>) dao.findAll();
