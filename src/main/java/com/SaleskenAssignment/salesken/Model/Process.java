@@ -28,7 +28,7 @@ public class Process {
     @Column(name="process_number")
     private String processNumber;
 
-    @ManyToMany(mappedBy = "processes",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "processes",fetch = FetchType.LAZY)
     private List<Product> products=new ArrayList<Product>();
 
 
