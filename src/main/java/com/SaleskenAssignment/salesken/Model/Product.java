@@ -31,6 +31,9 @@ public class Product {
     @Column(name="product_name")
     private String productName;
 
+    /**
+     * The price of the product
+     */
     @NonNull
     @Column(name="product_price")
     private String productPrice;
@@ -58,7 +61,7 @@ public class Product {
     private String productDescription;
 
     /**
-     * The image file name fo the product
+     * The image file name for the product
      */
     @NonNull
     @Column(name="product_image_name")
