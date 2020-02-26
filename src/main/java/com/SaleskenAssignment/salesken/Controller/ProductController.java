@@ -55,8 +55,9 @@ public Product AddProduct(@RequestBody String json) {
     String jsonProductNumberOfDocuments = jsonObj.getString("product_number_of_documents");
     String jsonproductDescription = jsonObj.getString("product_description");
     String jsonproductImageName = jsonObj.getString("product_image_name");
+    String jsonproductPrice=jsonObj.getString("product_price");
     List<Process> processArrayList=new ArrayList<Process>();
-    Product product = new Product(jsonProductName, jsonProductNumberOfDocuments, jsonproductDescription, jsonproductImageName,processArrayList);
+    Product product = new Product(jsonProductName, jsonProductNumberOfDocuments, jsonproductDescription, jsonproductImageName,jsonproductPrice,processArrayList);
     return dao.save(product);
 }
     /**
@@ -73,6 +74,7 @@ public Product AddProduct(@RequestBody String json) {
         product.setProductNumberOfDocuments(jsonObj.getString("product_number_of_documents"));
         product.setProductDescription(jsonObj.getString("product_description"));
         product.setProductImageName(jsonObj.getString("product_image_name"));
+        product.setProductPrice(jsonObj.getString("product_price"));
         List<Process> processArrayList=new ArrayList<Process>();
         product.setProcesses(processArrayList);
         dao.save(product);

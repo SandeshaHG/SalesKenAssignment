@@ -31,6 +31,18 @@ public class Product {
     @Column(name="product_name")
     private String productName;
 
+    @NonNull
+    @Column(name="product_price")
+    private String productPrice;
+
+    public String getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(String productPrice) {
+        this.productPrice = productPrice;
+    }
+
     /**
      * The Number of documents in the product
      */
@@ -58,12 +70,13 @@ public class Product {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Process> processes=new ArrayList<Process>();
 
-    public Product(String productName, String productNumberOfDocuments, String productDescription, String productImageName, List<Process> processes) {
+    public Product(String productName, String productNumberOfDocuments, String productDescription, String productImageName, String productPrice,List<Process> processes) {
         this.productName = productName;
         this.productNumberOfDocuments = productNumberOfDocuments;
         this.productDescription = productDescription;
         this.productImageName = productImageName;
         this.processes = processes;
+        this.productPrice=productPrice;
     }
 
     public List<Process> getProcesses() {
